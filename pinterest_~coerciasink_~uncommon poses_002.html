@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Page 2 of 3</title>
+    <title>Page 2 of 4</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script src="script.js"></script>
     <!-- <style>html { scroll-behavior: smooth; }</style> -->
@@ -10,19 +10,19 @@
 <!-- <body class="horizontal-mode"> -->
 
 <body>
-    <h1>Page 2 of 3</h1>
-    <a class="button" href="index.html">⬅ Back to Index</a>
+    <h1>Page 2 of 4</h1>
+    <nav class="breadcrumbs"><a href="index.html">index</a> &raquo; <a href="pinterest_001.html">pinterest</a> &raquo; <a href="pinterest_~coerciasink_001.html">coerciasink</a> &raquo; uncommon poses</nav>
 
     <div>
         <label for="columnCountInput">Column Count: </label>
-        <input type="number" id="columnCountInput" min="1" max="10" value="6">
+        <input type="number" id="columnCountInput" min="1" max="10" value="">
     </div>
     <!-- <div style="text-align:center; margin-bottom: 1em;">
         <button id="toggleLayout" style="padding: 6px 12px;">Switch to Justified</button>
     </div> -->
-    <p align="center"> Images on this page - 42, on this board - 123</p>
-    <p align="right"> Created on - 2025-08-15 17:54:35</p>
-    <p align="right">Created with boards version (commit hash): 673eb15</p>
+    <p align="center"> Images on this page - 42, on this board - 129</p>
+    <p align="right"> Created on - 2025-08-20 22:32:14</p>
+    <p align="right">Created with boards version: 0.2.19</p>
 
     <hr>
 
@@ -65,8 +65,8 @@
 </div>
 
 <div class="masonry-item">
-    <a href="https://cdn.imgchest.com/files/4gdcxm9nj34.jpg" onclick="copyToClipboard('https://cdn.imgchest.com/files/4gdcxm9nj34.jpg'); event.preventDefault();">
-        <img src="https://cdn.imgchest.com/files/4gdcxm9nj34.jpg" alt="https://cdn.imgchest.com/files/4gdcxm9nj34.jpg" loading="lazy">
+    <a href="https://cdn.imgchest.com/files/45xcv2g6qd7.jpg" onclick="copyToClipboard('https://cdn.imgchest.com/files/45xcv2g6qd7.jpg'); event.preventDefault();">
+        <img src="https://cdn.imgchest.com/files/45xcv2g6qd7.jpg" alt="https://cdn.imgchest.com/files/45xcv2g6qd7.jpg" loading="lazy">
     </a>
 </div>
 
@@ -89,8 +89,8 @@
 </div>
 
 <div class="masonry-item">
-    <a href="https://cdn.imgchest.com/files/739cxk56oj7.jpg" onclick="copyToClipboard('https://cdn.imgchest.com/files/739cxk56oj7.jpg'); event.preventDefault();">
-        <img src="https://cdn.imgchest.com/files/739cxk56oj7.jpg" alt="https://cdn.imgchest.com/files/739cxk56oj7.jpg" loading="lazy">
+    <a href="https://cdn.imgchest.com/files/yxkczwmbwg7.jpg" onclick="copyToClipboard('https://cdn.imgchest.com/files/yxkczwmbwg7.jpg'); event.preventDefault();">
+        <img src="https://cdn.imgchest.com/files/yxkczwmbwg7.jpg" alt="https://cdn.imgchest.com/files/yxkczwmbwg7.jpg" loading="lazy">
     </a>
 </div>
 
@@ -282,14 +282,23 @@
     </div>
 
     <div class="pagination">
-&nbsp;<a href="pinterest_~coerciasink_~uncommon poses_001.html">1</a> <strong>2</strong> <a href="pinterest_~coerciasink_~uncommon poses_003.html">3</a> &nbsp;
+&nbsp;<a href="pinterest_~coerciasink_~uncommon poses_001.html">1</a> <strong>2</strong> <a href="pinterest_~coerciasink_~uncommon poses_003.html">3</a> <a href="pinterest_~coerciasink_~uncommon poses_004.html">4</a> &nbsp;
         <form method="get" style="display:inline;" onsubmit="window.location.href=this.action.replace('PAGE', this.page.value); return false;">
-            <input type="number" name="page" min="1" max="3" style="width:50px;">
+            <input type="number" name="page" min="1" max="4" style="width:50px;">
             <input type="submit" value="Go">
         </form>
+        
+        <button type="button" onclick="
+            const total=4;
+            const randPage = Math.floor(Math.random() * total) + 1;
+            const newFile = 'pinterest_~coerciasink_~uncommon poses_PAGE.html';
+            window.location.href = newFile.replace('PAGE', randPage.toString().padStart(3, '0'));
+        ">
+            Random Page
+        </button>
         </div>
-
-    <a class="button" href="index.html">⬅ Back to Index</a>
+    
+    <nav class="breadcrumbs"><a href="index.html">index</a> &raquo; <a href="pinterest_001.html">pinterest</a> &raquo; <a href="pinterest_~coerciasink_001.html">coerciasink</a> &raquo; uncommon poses</nav>
 </body>
 
 </html>

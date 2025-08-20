@@ -11,18 +11,18 @@
 
 <body>
     <h1>Page 3 of 6</h1>
-    <a class="button" href="index.html">⬅ Back to Index</a>
+    <nav class="breadcrumbs"><a href="index.html">index</a> &raquo; <a href="pinterest_001.html">pinterest</a> &raquo; <a href="pinterest_~coerciasink_001.html">coerciasink</a> &raquo; Poses to draw</nav>
 
     <div>
         <label for="columnCountInput">Column Count: </label>
-        <input type="number" id="columnCountInput" min="1" max="10" value="6">
+        <input type="number" id="columnCountInput" min="1" max="10" value="">
     </div>
     <!-- <div style="text-align:center; margin-bottom: 1em;">
         <button id="toggleLayout" style="padding: 6px 12px;">Switch to Justified</button>
     </div> -->
     <p align="center"> Images on this page - 42, on this board - 227</p>
-    <p align="right"> Created on - 2025-08-15 17:54:35</p>
-    <p align="right">Created with boards version (commit hash): 673eb15</p>
+    <p align="right"> Created on - 2025-08-20 22:32:14</p>
+    <p align="right">Created with boards version: 0.2.19</p>
 
     <hr>
 
@@ -287,9 +287,18 @@
             <input type="number" name="page" min="1" max="6" style="width:50px;">
             <input type="submit" value="Go">
         </form>
+        
+        <button type="button" onclick="
+            const total=6;
+            const randPage = Math.floor(Math.random() * total) + 1;
+            const newFile = 'pinterest_~coerciasink_~Poses to draw_PAGE.html';
+            window.location.href = newFile.replace('PAGE', randPage.toString().padStart(3, '0'));
+        ">
+            Random Page
+        </button>
         </div>
-
-    <a class="button" href="index.html">⬅ Back to Index</a>
+    
+    <nav class="breadcrumbs"><a href="index.html">index</a> &raquo; <a href="pinterest_001.html">pinterest</a> &raquo; <a href="pinterest_~coerciasink_001.html">coerciasink</a> &raquo; Poses to draw</nav>
 </body>
 
 </html>
