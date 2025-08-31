@@ -5,7 +5,7 @@ body, html {
 }
 
 .masonry-container {
-    column-count: 5;
+    column-count: var(--cols, 5);
     column-gap: 20px;
     /* background-color: rgb(69, 69, 69); */
     margin-left: calc(20px * 4);
