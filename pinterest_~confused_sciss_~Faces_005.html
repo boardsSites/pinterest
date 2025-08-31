@@ -10,7 +10,18 @@
 </head>
 <!-- <body class="horizontal-mode"> -->
 
+<!-- <body style="margin:0;"> -->
 <body>
+  <div style="
+    position:fixed; inset:0;
+    background:
+        linear-gradient(#171717e2, #171717e2),  /* dark overlay */
+        url('https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg') center top repeat-y;
+    background-size: 100% auto;
+    filter:grayscale(50%) opacity(1);
+    z-index:-1;
+  "></div>
+</body>
     <h1>Faces, Page 5 of 5</h1>
     <nav class="breadcrumbs"><a href="index.html">index</a> &raquo; <a href="pinterest_001.html">pinterest</a> &raquo; <a href="pinterest_~confused_sciss_001.html">confused_sciss</a> &raquo; Faces</nav>
 
@@ -18,26 +29,28 @@
         <label for="columnCountInput">Column Count: </label>
         <input type="number" id="columnCountInput" min="1" max="10" value="5">
     </div>
-    <!-- <div style="text-align:center; margin-bottom: 1em;">
-        <button id="toggleLayout" style="padding: 6px 12px;">Switch to Justified</button>
-    </div> -->
+    <div style="text-align:center; margin-bottom: 1em;">
+        <button id="toggleLayout" style="padding: 6px 12px;">Switch to Masonry</button>
+    </div>
     <p align="center"> Images on this page - 2, on this board - 202</p>
-    <p align="right"> Created on - 2025-08-31 22:41:44</p>
-    <p align="right"> Created with pixBoards version: 0.2.25</p>
+    <p align="right"> Created on - 2025-09-01 02:20:25</p>
+    <p align="right"> Created with pixBoards version: 0.2.26</p>
 
     <hr>
 
-    <div class="masonry-container">
+    <div id="gallery" class="justified-container">
         
-<div class="masonry-item">
+<div class="justified-item">
  <a href="https://i.pinimg.com/originals/09/2f/4b/092f4be187689929bb5d91c5c9a5f9d9.jpg" onclick="copyToClipboard('https://i.pinimg.com/originals/09/2f/4b/092f4be187689929bb5d91c5c9a5f9d9.jpg'); event.preventDefault();">
-  <img src="https://i.pinimg.com/originals/09/2f/4b/092f4be187689929bb5d91c5c9a5f9d9.jpg" alt="https://i.pinimg.com/originals/09/2f/4b/092f4be187689929bb5d91c5c9a5f9d9.jpg" loading="lazy">
+  <img src="https://i.pinimg.com/originals/09/2f/4b/092f4be187689929bb5d91c5c9a5f9d9.jpg" alt="https://i.pinimg.com/originals/09/2f/4b/092f4be187689929bb5d91c5c9a5f9d9.jpg" 
+  >
  </a>
 </div>
 
-<div class="masonry-item">
+<div class="justified-item">
  <a href="https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg" onclick="copyToClipboard('https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg'); event.preventDefault();">
-  <img src="https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg" alt="https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg" loading="lazy">
+  <img src="https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg" alt="https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg" 
+  >
  </a>
 </div>
     </div>
@@ -63,3 +76,23 @@
 </body>
 
 </html>
+
+
+
+<!-- 
+<body style="margin:0;">
+  <div style="
+    position:fixed; inset:0;
+    background:url('https://i.pinimg.com/originals/08/d7/e0/08d7e098ed0f71f141c584a4d612ad6b.jpg') center/cover no-repeat;
+    filter:grayscale(50%) opacity(0.3);
+    z-index:-1;
+  "></div>
+
+
+<body style="margin:0;">
+  <div style="
+    position:fixed; inset:0;
+    background:url('file:///D:/root/gallery-dl/pinterest/coerciasink/outfits/pinterest_969610994782220216.jpg') center/cover no-repeat;
+    filter:grayscale(100%) opacity(0.3);
+    z-index:-1;
+  "></div> -->
