@@ -1,8 +1,3 @@
-
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text);
-}
-
 // --- Cookie helpers ---
 function setCookie(name, value, days) {
   let expires = "";
@@ -18,65 +13,23 @@ function getCookie(name) {
   const nameEQ = name + "=";
   const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) === " ") c = c.substring(1);
-    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+    let c = ca[i].trim();
+    if (c.indexOf(nameEQ) === 0)
+      return c.substring(nameEQ.length, c.length);
   }
   return null;
 }
 
-// --- Layout handling ---
-function applyLayout() {
-  const layout = getCookie("layout") || "grid"; // default fallback
-  const gallery = document.getElementById("gallery");
-  if (!gallery) return;
-
-  gallery.classList.remove("grid", "masonry-layout");
-  gallery.classList.add(layout);
-
-  const toggleBtn = document.getElementById("switch-layout-btn");
-  if (toggleBtn) {
-    toggleBtn.textContent =
-      layout === "grid" ? "Switch to Masonry" : "Switch to Grid";
+// --- Apply column count ---
+function applyColumnCount(gallery, count) {
+  if (!gallery || !count) return;
+  gallery.style.setProperty("--cols", count);
+  if (gallery.classList.contains("masonry-container")) {
+    gallery.style.columnCount = count;
   }
 }
 
-function switchLayout() {
-  const gallery = document.getElementById("gallery");
-  if (!gallery) return;
-
-  const newLayout = gallery.classList.contains("grid")
-    ? "masonry-layout"
-    : "grid";
-
-  gallery.classList.remove("grid", "masonry-layout");
-  gallery.classList.add(newLayout);
-
-  setCookie("layout", newLayout, 30);
-  applyLayout();
-}
-
-// --- Column count handling ---
-function applyColumnCount() {
-  const count = getCookie("columns") || 3; // default fallback
-  const gallery = document.getElementById("gallery");
-  if (gallery) {
-    gallery.style.setProperty("--column-count", count);
-  }
-
-  const input = document.getElementById("column-count");
-  if (input) input.value = count;
-}
-
-function updateColumnCount(value) {
-  const gallery = document.getElementById("gallery");
-  if (gallery) {
-    gallery.style.setProperty("--column-count", value);
-  }
-  setCookie("columns", value, 30);
-}
-
-// --- Justified layout helper ---
+// --- Justified layout logic ---
 function justifyGallery(containerSelector, rowHeight = 240, gap = 6) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
@@ -90,7 +43,7 @@ function justifyGallery(containerSelector, rowHeight = 240, gap = 6) {
     const img = item.querySelector("img, video");
     if (!img) return;
 
-    const aspectRatio = (img.naturalWidth || 1) / (img.naturalHeight || 1);
+    const aspectRatio = img.naturalWidth / img.naturalHeight;
     const itemWidth = rowHeight * aspectRatio;
 
     row.push({ item, width: itemWidth });
@@ -108,22 +61,85 @@ function justifyGallery(containerSelector, rowHeight = 240, gap = 6) {
   });
 }
 
-// --- Initialize ---
-document.addEventListener("DOMContentLoaded", () => {
-  applyLayout();
-  applyColumnCount();
+// --- Init ---
+document.addEventListener("DOMContentLoaded", function () {
+  const gallery = document.getElementById("gallery");
+  const toggleButton = document.getElementById("toggleLayout");
+  const input = document.getElementById("columnCountInput");
 
-  const toggleBtn = document.getElementById("switch-layout-btn");
-  if (toggleBtn) toggleBtn.addEventListener("click", switchLayout);
+  if (!gallery) return;
 
-  const columnInput = document.getElementById("column-count");
-  if (columnInput) {
-    columnInput.addEventListener("input", (e) =>
-      updateColumnCount(e.target.value)
-    );
+  // Restore saved layout
+  let savedLayout = getCookie("layout") || "masonry";
+  gallery.classList.add(savedLayout + "-container");
+
+  // Restore column count
+  let savedCols = parseInt(getCookie("columns") || "3", 10);
+  applyColumnCount(gallery, savedCols);
+  if (input) input.value = savedCols;
+
+  // Handle column input change
+  if (input) {
+    input.addEventListener("input", function () {
+      const count = Math.max(1, parseInt(this.value || "1", 10));
+      applyColumnCount(gallery, count);
+      setCookie("columns", count, 30);
+    });
+  }
+
+  // Handle toggle button
+  if (toggleButton) {
+    toggleButton.textContent =
+      savedLayout === "masonry" ? "Switch to Justified" : "Switch to Masonry";
+
+    toggleButton.addEventListener("click", () => {
+      const isMasonry = gallery.classList.contains("masonry-container");
+      const newClass = isMasonry
+        ? "justified-container"
+        : "masonry-container";
+      const oldClass = isMasonry
+        ? "masonry-container"
+        : "justified-container";
+
+      // Switch container
+      gallery.classList.remove(oldClass);
+      gallery.classList.add(newClass);
+
+      // Switch items
+      const items = gallery.children;
+      for (let item of items) {
+        if (isMasonry) {
+          // switching to justified
+          item.classList.remove("masonry-item");
+          item.classList.add("justified-item");
+        } else {
+          // switching to masonry
+          item.classList.remove("justified-item");
+          item.classList.add("masonry-item");
+        }
+      }
+
+      toggleButton.textContent = isMasonry
+        ? "Switch to Masonry"
+        : "Switch to Justified";
+
+      setCookie("layout", isMasonry ? "justified" : "masonry", 30);
+
+      if (!isMasonry) {
+        // Re-apply column count in masonry
+        const count = Math.max(
+          1,
+          parseInt(input?.value || savedCols || "3", 10)
+        );
+        applyColumnCount(gallery, count);
+      } else {
+        justifyGallery(".justified-container");
+      }
+    });
   }
 });
 
+// Re-run justified layout on load + resize
 window.addEventListener("load", () => {
   justifyGallery(".justified-container");
 });
